@@ -6,29 +6,35 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:23:06 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/08 17:34:16 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/09 14:59:53 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	get_height(char *file)
+void	get_height(char *file, fdf *data)
 {
 	char	*line;
 	int		fd;
-	int		height;
+	int		hght;
+	int		width;
 
 	fd = open(file, O_RDONLY);
-	height = 0;
+	hght = 0;
+	width = 0;
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		height++;
+		hght++;
+		if (wdcounter(line, ' ') > width)
+			width = wdcounter(line, ' ');
 		free (line);
 		line = get_next_line(fd);
 	}
+	free (line);
 	close (fd);
-	return (height);
+	data->width = width;
+	data->height = hght;
 }
 
 int	wdcounter(char *line, char c)
@@ -40,30 +46,18 @@ int	wdcounter(char *line, char c)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] == c)
+		while (line[i] == c)
 			i++;
-		else if (line[i] >= 48 && line[i] <= 57)
+		if (line[i] >= '0' && line[i] <= '9')
 		{
-			while (line[i] >= 48 && line[i] <= 57)
+			while (line[i] >= '0' && line[i] <= '9')
 				i++;
 			count++;
 		}
+		else if (line[i] != c)
+			i++;
 	}
 	return (count);
-}
-
-int	get_width(char *file)
-{
-	int		fd;
-	int		width;
-	char	*line;
-
-	fd = open(file, O_RDONLY);
-	line = get_next_line(fd);
-	width = wdcounter(line, ' ');
-	close (fd);
-	free (line);
-	return (width);
 }
 
 void	create_map(int *m_line, char *line)
@@ -89,15 +83,14 @@ void	read_file(char *file, fdf *data)
 	int		i;
 
 	i = 0;
-	data->height = get_height(file);
-	data->width = get_width(file);
+	get_height(file, data);
 	data->map = (int **)malloc(sizeof(int *) * (data->height + 1));
 	while (i <= data->height)
-		data->map[i++] = (int *)malloc(sizeof(int) * (data->width + 1));
-	fd = open(file, O_RDONLY);
+		data->map[i++] = (int *)malloc(sizeof(int) * (data->width));
 	i = 0;
+	fd = open(file, O_RDONLY);
 	line = get_next_line(fd);
-	while (line != NULL)
+	while (i < data->height)
 	{
 		create_map(data->map[i], line);
 		free (line);

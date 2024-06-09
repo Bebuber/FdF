@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 19:49:31 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/05 14:58:39 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/09 14:46:06 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,25 +84,25 @@ char	*ft_read_into_storage(int fd, char *storage)
 
 char	*get_next_line(int fd)
 {
-	static char	*storage[OPEN_MAX];
+	static char	*storage;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
-		free (storage[fd]);
-		storage[fd] = NULL;
+		free (storage);
+		storage = NULL;
 		return (NULL);
 	}
-	storage[fd] = ft_read_into_storage (fd, storage[fd]);
-	if (storage[fd] == NULL)
+	storage = ft_read_into_storage (fd, storage);
+	if (storage == NULL)
 		return (NULL);
-	line = ft_get_line(storage[fd]);
-	if (line == NULL || storage[fd][0] == '\0' || storage[fd] == NULL)
+	line = ft_get_line(storage);
+	if (line == NULL || storage[0] == '\0' || storage == NULL)
 	{
-		free (storage[fd]);
-		storage[fd] = NULL;
+		free (storage);
+		storage = NULL;
 		return (NULL);
 	}
-	storage[fd] = ft_cut_line_out(storage[fd]);
+	storage = ft_cut_line_out(storage);
 	return (line);
 }

@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:43:04 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/08 17:23:42 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/09 14:59:36 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct
 int		main(int argc, char **argv);
 
 //read_file
-int		get_height(char *file);
+void	get_height(char *file, fdf *data);
 int		wdcounter(char *line, char c);
 int		get_width(char *file);
 void	create_map(int *m_line, char *line);
