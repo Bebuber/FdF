@@ -6,36 +6,11 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:23:06 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/09 14:59:53 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/15 15:47:32 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	get_height(char *file, fdf *data)
-{
-	char	*line;
-	int		fd;
-	int		hght;
-	int		width;
-
-	fd = open(file, O_RDONLY);
-	hght = 0;
-	width = 0;
-	line = get_next_line(fd);
-	while (line != NULL)
-	{
-		hght++;
-		if (wdcounter(line, ' ') > width)
-			width = wdcounter(line, ' ');
-		free (line);
-		line = get_next_line(fd);
-	}
-	free (line);
-	close (fd);
-	data->width = width;
-	data->height = hght;
-}
 
 int	wdcounter(char *line, char c)
 {
@@ -60,6 +35,31 @@ int	wdcounter(char *line, char c)
 	return (count);
 }
 
+void	get_height(char *file, fdf_t *data)
+{
+	char	*line;
+	int		fd;
+	int		hght;
+	int		width;
+
+	fd = open(file, O_RDONLY);
+	hght = 0;
+	width = 0;
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
+		hght++;
+		if (wdcounter(line, ' ') > width)
+			width = wdcounter(line, ' ');
+		free (line);
+		line = get_next_line(fd);
+	}
+	free (line);
+	close (fd);
+	data->width = width;
+	data->height = hght;
+}
+
 void	create_map(int *m_line, char *line)
 {
 	char	**nums;
@@ -76,7 +76,7 @@ void	create_map(int *m_line, char *line)
 	free (nums);
 }
 
-void	read_file(char *file, fdf *data)
+void	read_file(char *file, fdf_t *data)
 {
 	int		fd;
 	char	*line;
