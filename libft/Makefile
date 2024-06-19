@@ -6,9 +6,11 @@
 #    By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/09 11:56:48 by bebuber           #+#    #+#              #
-#    Updated: 2024/06/09 12:21:43 by bebuber          ###   ########.fr        #
+#    Updated: 2024/06/17 19:06:14 by bebuber          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+.SILENT:
 
 NAME	= libft.a
 
@@ -29,6 +31,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	ar -rcs $(NAME) $(OBJS)
+	echo '\033[0;32m'"==>	Libft compiled!" 
 
 clean:
 	$(RM) $(OBJS)

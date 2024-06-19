@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:43:04 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/16 17:00:17 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/19 21:40:59 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,35 +22,41 @@
 # include "libft/libft.h"
 # include "minilibx_macos/mlx.h"
 
+typedef struct s_point
+{
+	int	z;
+	int	color;
+}	t_point;
+
 typedef struct fdf
 {
-	int		height;
-	int		width;
-	int		**map;
-	int		zoom;
-	int		color;
-	int		shift_x;
-	int		shift_y;
+	t_point		**map;
+	int			height;
+	int			width;
+	int			shift_x;
+	int			shift_y;
+	int			win_x;
+	int			win_y;
+	int			zoom;
 
-	void	*mlx_ptr;
-	void	*win_ptr;
+	void		*mlx_ptr;
+	void		*win_ptr;
 
-}	fdf_t;
-
-typedef struct mlx
-{
-	void*	window;
-	void*	context;
-	int32_t	width;
-	int32_t	height;
-	double	delta_time;
-}	mlx_t;
+}	t_fdf;
 
 int		main(int argc, char **argv);
 
-void	read_file(char *file, fdf_t *data);
-void	draw(float x, float y, float x1, float y1, fdf_t *data);
-void	draw_map(fdf_t *data);
-void	error(int argc, char *str);
-
+// read_file.c		&&		read_file_utils.c
+t_point	**read_file(char *file, t_fdf *data);
+void	is_valid(char **tmp, char **nums, t_point **map, t_fdf *data);
+int		hex_to_int(char *str);
+void	*ft_malloc(size_t size);
+// error.c
+void	print_error_exit(int code);
+void	free_arrays_and_exit(char **tmp, char **nums, t_point **map, t_fdf *data);
+void	free_data(t_fdf *data, t_point **map);
+void	free_exit_succesfully(t_fdf *data, t_point **map);
+// draw.c
+void	draw_map(t_fdf *data);
+int		check_file(char *file);
 #endif

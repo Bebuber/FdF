@@ -6,13 +6,13 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:23:06 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/15 15:47:32 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/19 21:41:42 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	wdcounter(char *line, char c)
+int	wdcounter(char *line, int width, int hght)
 {
 	int	count;
 	int	i;
@@ -21,83 +21,129 @@ int	wdcounter(char *line, char c)
 	i = 0;
 	while (line[i])
 	{
-		while (line[i] == c)
+		while (line[i] == ' ')
 			i++;
 		if (line[i] >= '0' && line[i] <= '9')
 		{
-			while (line[i] >= '0' && line[i] <= '9')
+			while ((line[i] >= '0' && line[i] <= '9') || line[i] == '-'\
+			|| line[i] == ',' || line[i] == 'x' || (line[i] >= 'a' && \
+			line[i] <= 'f') || (line[i] >= 'A' && line[i] <= 'F'))
 				i++;
 			count++;
 		}
-		else if (line[i] != c)
+		else if (line[i] != ' ')
 			i++;
 	}
+	if (hght != 0 && count != width)
+		print_error_exit(3);
 	return (count);
 }
 
-void	get_height(char *file, fdf_t *data)
+t_point	**get_height(char *file, t_fdf *data)
 {
 	char	*line;
 	int		fd;
 	int		hght;
 	int		width;
+	t_point	**map;
 
-	fd = open(file, O_RDONLY);
 	hght = 0;
 	width = 0;
+	fd = open(file, O_RDONLY);
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
+		width = wdcounter(line, width, hght);
 		hght++;
-		if (wdcounter(line, ' ') > width)
-			width = wdcounter(line, ' ');
 		free (line);
 		line = get_next_line(fd);
 	}
 	free (line);
 	close (fd);
-	data->width = width;
+	map = (t_point **)ft_malloc(sizeof(t_point *) * (hght + 1));
+	while (hght > 0)
+		map[hght--] = (t_point *)ft_malloc(sizeof(t_point) * (width + 1));
+	free_exit_succesfully(data, map);
 	data->height = hght;
+	data->width = width;
+	return (map);
 }
 
-void	create_map(int *m_line, char *line)
+int	get_color(char *str)
+{
+	int		i;
+	int		n;
+	int		res;
+
+	i = 0;
+	n = 0;
+	res = 0;
+	if (str[i] == '0' && str[i + 1] == 'x')
+		i += 2;
+	while (str[i])
+	{
+		if (str[i] >= '0' && str[i] <= '9')
+			n = str[i] - '0';
+		else if (str[i] >= 'a' && str[i] <= 'f')
+			n = str[i] - 'a' + 10;
+		else if (str[i] >= 'A' && str[i] <= 'F')
+			n = str[i] - 'A' + 10;
+		res = res * 16 + n;
+		i++;
+	}
+	return (res);
+}
+
+void	create_map(char *line, t_point **map, int y, t_fdf *data)
 {
 	char	**nums;
+	char	**tmp;
+	int		x;
 	int		i;
 
 	nums = ft_split(line, ' ');
+	x = 0;
 	i = 0;
-	while (nums[i])
+	while (nums[x])
 	{
-		m_line[i] = ft_atoi(nums[i]);
-		free (nums[i]);
-		i++;
+		i = 0;
+		tmp = ft_split(nums[x], ',');
+		is_valid(tmp, nums, map, data);
+		map[y][x].z = ft_atoi(tmp[0]);
+		if (*tmp[1])
+			map[y][x].color = get_color(tmp[1]);
+		else
+			map[y][x].color = -1;
+		while (tmp[i])
+			free (tmp[i++]);
+		free (tmp);
+		if (nums[x])
+			free (nums[x++]);
 	}
 	free (nums);
 }
 
-void	read_file(char *file, fdf_t *data)
+t_point	**read_file(char *file, t_fdf *data)
 {
 	int		fd;
 	char	*line;
 	int		i;
+	t_point	**map;
 
 	i = 0;
-	get_height(file, data);
-	data->map = (int **)malloc(sizeof(int *) * (data->height + 1));
-	while (i <= data->height)
-		data->map[i++] = (int *)malloc(sizeof(int) * (data->width));
-	i = 0;
+	map = get_height(file, data);
 	fd = open(file, O_RDONLY);
 	line = get_next_line(fd);
 	while (i < data->height)
 	{
-		create_map(data->map[i], line);
+		create_map(line, map, i, data);
 		free (line);
 		line = get_next_line(fd);
 		i++;
 	}
-	free (line);
+	map[i] = NULL;
+	if (line)
+		free (line);
 	close(fd);
-	data->map[i] = NULL;
+	return (map);
 }

@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:12:00 by bebuber           #+#    #+#             */
-/*   Updated: 2024/03/26 20:45:45 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/16 20:05:38 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		a++;
 	}
 	new[i] = '\0';
+	free((char *)s1);
 	return (new);
 }
