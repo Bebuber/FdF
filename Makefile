@@ -6,7 +6,7 @@
 #    By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/05 16:25:10 by bebuber           #+#    #+#              #
-#    Updated: 2024/06/17 21:05:40 by bebuber          ###   ########.fr        #
+#    Updated: 2024/06/20 19:28:58 by bebuber          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,14 +15,14 @@
 NAME	= fdf
 
 LIBFT	= libft/libft.a
-LIBMLX	= ./minilibx_macos/libmlx.a
-LIBS	= $(LIBMLX) -framework OpenGL -framework AppKit
+LIBMLX	= minilibx_macos/libmlx.a
+LIBS	=$(LIBMLX) -framework OpenGL -framework AppKit 
 
 CC		= cc
 CFLAGS	= -Wall -Wextra -Werror -Wunreachable-code
 RM		= rm -rf
 
-SRCS	= main.c read_file.c draw.c error.c read_file_utils.c
+SRCS	= main.c read_file.c draw.c error.c read_file_utils.c keyboard.c
 OBJS	= $(SRCS:.c=.o)
 
 all: $(NAME)

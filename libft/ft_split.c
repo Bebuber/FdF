@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 20:17:33 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/17 21:41:02 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/20 14:21:24 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	ft_size_cols(const char *s, char c, int n)
 	int	size;
 
 	size = 0;
-	while (s[n] != c && s[n])
+	while (s[n] && s[n] != c && s[n] != '\n')
 	{
 		size ++;
 		n++;

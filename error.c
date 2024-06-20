@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:55:43 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/19 21:37:27 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/20 19:33:27 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,25 @@ void	print_error_exit(int code)
 
 void	free_arrays_and_exit(char **tmp, char **nums, t_point **map, t_fdf *data)
 {
-	int	i;
-
-	i = 0;
-	while (tmp && tmp[i])
-		free(tmp[i++]);
-	free(tmp);
-	i = 0;
-	while (nums && nums[i])
-		free(nums[i++]);
-	free(nums);
-	free_data(data, map);
+	free_arr(tmp);
+	free_arr(nums);
+	free_data_map_separately(data, map);
 	print_error_exit(3);
 }
 
-int		check_file(char *file)
+void	free_arr(char **arr)
+{
+	int	i;
+
+	i = 0;
+	if (!arr)
+		return ;
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
+}
+
+int	check_file(char *file)
 {
 	int	fd;
 
@@ -52,26 +56,34 @@ int		check_file(char *file)
 	return (0);
 }
 
-void	free_data(t_fdf *data, t_point **map)
+void	free_data_map_separately(t_fdf *data, t_point **map)
 {
 	int		i;
 
 	i = 0;
-	while (map[i])
-		free(map[i++]);
-	free(map);
-	free(data);
+	if (map && map[0])
+	{
+		while (i < data->height)
+			free(map[i++]);
+		free(map);
+	}
+	if (data)
+		free(data);
 }
 
-void	free_exit_succesfully(t_fdf *data, t_point **map)
+void	free_exit_succesfully(t_fdf *data)
 {
 	int		i;
 
 	i = 0;
-	while (map[i])
-		free(map[i++]);
-	free(map);
-	free(data);
+	if (data->map && data->map[0])
+	{
+		while (i < data->height)
+			free(data->map[i++]);
+		free(data->map);
+	}
+	if (data)
+		free(data);
 	system("leaks fdf");
 	exit(EXIT_SUCCESS);
 }

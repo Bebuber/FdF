@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:43:04 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/19 21:40:59 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/20 20:51:21 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@
 
 typedef struct s_point
 {
-	int	z;
-	int	color;
+	float	x;
+	float	y;
+	float	z;
+	int		color;
 }	t_point;
 
 typedef struct fdf
@@ -38,6 +40,7 @@ typedef struct fdf
 	int			win_x;
 	int			win_y;
 	int			zoom;
+	float		angle;
 
 	void		*mlx_ptr;
 	void		*win_ptr;
@@ -54,9 +57,14 @@ void	*ft_malloc(size_t size);
 // error.c
 void	print_error_exit(int code);
 void	free_arrays_and_exit(char **tmp, char **nums, t_point **map, t_fdf *data);
-void	free_data(t_fdf *data, t_point **map);
-void	free_exit_succesfully(t_fdf *data, t_point **map);
+void	free_data_map_separately(t_fdf *data, t_point **map);
+void	free_exit_succesfully(t_fdf *data);
+void	free_arr(char **arr);
 // draw.c
 void	draw_map(t_fdf *data);
 int		check_file(char *file);
+void	draw_line(int x, int y, int x1, int y1, t_fdf *data);
+// keyboard.c
+int	deal_key(int key, t_fdf *param);
+
 #endif

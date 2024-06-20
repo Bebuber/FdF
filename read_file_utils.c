@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 20:56:33 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/19 21:35:45 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/20 14:56:57 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	is_valid(char **tmp, char **nums, t_point **map, t_fdf *data)
 	int	i;
 
 	i = 0;
-	if (!tmp[0])
+	if (!tmp)
 		free_arrays_and_exit(tmp, nums, map, data);
 	if (tmp[0][i] == '-')
 		i++;
-	while (tmp[0][i])
+	while (tmp && tmp[0][i])
 	{
 		if (tmp[0][i] < '0' || tmp[0][i] > '9')
 			free_arrays_and_exit(tmp, nums, map, data);

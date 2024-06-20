@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:23:06 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/19 21:41:42 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/20 18:58:00 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,9 @@ t_point	**get_height(char *file, t_fdf *data)
 	free (line);
 	close (fd);
 	map = (t_point **)ft_malloc(sizeof(t_point *) * (hght + 1));
-	while (hght > 0)
-		map[hght--] = (t_point *)ft_malloc(sizeof(t_point) * (width + 1));
-	free_exit_succesfully(data, map);
 	data->height = hght;
+	while (--hght >= 0)
+		map[hght] = (t_point *)ft_malloc(sizeof(t_point) * (width + 1));
 	data->width = width;
 	return (map);
 }
@@ -106,21 +105,17 @@ void	create_map(char *line, t_point **map, int y, t_fdf *data)
 	i = 0;
 	while (nums[x])
 	{
-		i = 0;
 		tmp = ft_split(nums[x], ',');
 		is_valid(tmp, nums, map, data);
 		map[y][x].z = ft_atoi(tmp[0]);
-		if (*tmp[1])
+		if (tmp[1])
 			map[y][x].color = get_color(tmp[1]);
 		else
 			map[y][x].color = -1;
-		while (tmp[i])
-			free (tmp[i++]);
-		free (tmp);
-		if (nums[x])
-			free (nums[x++]);
+		free_arr(tmp);
+		x++;
 	}
-	free (nums);
+	free_arr(nums);
 }
 
 t_point	**read_file(char *file, t_fdf *data)
@@ -145,5 +140,6 @@ t_point	**read_file(char *file, t_fdf *data)
 	if (line)
 		free (line);
 	close(fd);
+
 	return (map);
 }
