@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:43:04 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/20 20:51:21 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/21 12:39:34 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,11 @@ void	free_arr(char **arr);
 // draw.c
 void	draw_map(t_fdf *data);
 int		check_file(char *file);
-void	draw_line(int x, int y, int x1, int y1, t_fdf *data);
-// keyboard.c
+void	draw_line(t_point p1, t_point p2, t_fdf *data);
+// key_hook.c
 int	deal_key(int key, t_fdf *param);
+// mouse_hook.c
+int	deal_mouse(int button, int x, int y, t_fdf *param);
+int	close_the_window(int button, int x, int y);
 
 #endif

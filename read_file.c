@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:23:06 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/20 18:58:00 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/21 15:30:56 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	wdcounter(char *line, int width, int hght)
 		else if (line[i] != ' ')
 			i++;
 	}
+	// hght = 0;
+	// width = count;
 	if (hght != 0 && count != width)
 		print_error_exit(3);
 	return (count);
@@ -108,6 +110,8 @@ void	create_map(char *line, t_point **map, int y, t_fdf *data)
 		tmp = ft_split(nums[x], ',');
 		is_valid(tmp, nums, map, data);
 		map[y][x].z = ft_atoi(tmp[0]);
+		map[y][x].x = x;
+		map[y][x].y = y;
 		if (tmp[1])
 			map[y][x].color = get_color(tmp[1]);
 		else

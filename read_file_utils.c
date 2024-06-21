@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 20:56:33 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/20 14:56:57 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/21 14:57:48 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	is_valid(char **tmp, char **nums, t_point **map, t_fdf *data)
 		i++;
 	while (tmp && tmp[0][i])
 	{
-		if (tmp[0][i] < '0' || tmp[0][i] > '9')
+		if ((tmp[0][i] < '0' || tmp[0][i] > '9') && (tmp[0][i] != '\n'))
 			free_arrays_and_exit(tmp, nums, map, data);
 		i++;
 	}
@@ -33,7 +33,7 @@ void	is_valid(char **tmp, char **nums, t_point **map, t_fdf *data)
 		if (tmp[1][i] == '0' && tmp[1][i + 1] == 'x')
 			i += 2;
 		if (!((tmp[1][i] >= '0' && tmp[1][i] <= '9') || (tmp[1][i] >= 'a'\
-		&& tmp[1][i] <= 'f') || (tmp[1][i] >= 'A' && tmp[1][i] <= 'F')))
+		&& tmp[1][i] <= 'f') || (tmp[1][i] >= 'A' && tmp[1][i] <= 'F') || tmp[1][i] == '\n'))
 			free_arrays_and_exit(tmp, nums, map, data);
 		i++;
 	}

@@ -6,7 +6,7 @@
 #    By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/05 16:25:10 by bebuber           #+#    #+#              #
-#    Updated: 2024/06/20 19:28:58 by bebuber          ###   ########.fr        #
+#    Updated: 2024/06/21 15:45:39 by bebuber          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ CC		= cc
 CFLAGS	= -Wall -Wextra -Werror -Wunreachable-code
 RM		= rm -rf
 
-SRCS	= main.c read_file.c draw.c error.c read_file_utils.c keyboard.c
+SRCS	= main.c read_file.c draw.c error.c read_file_utils.c key_hook.c draw_utils.c
 OBJS	= $(SRCS:.c=.o)
 
 all: $(NAME)
