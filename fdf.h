@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:43:04 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/21 15:49:50 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/21 16:13:23 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct fdf
 	int			win_y;
 	int			zoom;
 	float		angle;
+	int			is_iso;
 
 	void		*mlx_ptr;
 	void		*win_ptr;

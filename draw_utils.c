@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.utils.c                                       :+:      :+:    :+:   */
+/*   draw_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 15:43:48 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/21 15:45:17 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/21 16:14:09 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	iso(t_point *p1, t_point *p2, float angle)
 void	set_values(t_point *p1, t_point *p2, t_fdf *data)
 {
 	zoom(p1, p2, data);
-	iso(p1, p2, data->angle);
+	if (data->is_iso == 1)
+		iso(p1, p2, data->angle);
 	(*p1).x += data->shift_x;
 	(*p1).y += data->shift_y;
 	(*p2).x += data->shift_x;

@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 11:04:27 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/21 15:44:53 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/21 16:49:48 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	set_color(t_point p1, t_point p2)
 {
 	if (p1.color < 0 && p2.color < 0)
 	{
-		if (p2.z < p1.z)
+		if (p2.z > 5 || p1.z > 5)
 			return (0xff0000);
 		else
 			return (0x00ff00);

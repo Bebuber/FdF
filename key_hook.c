@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 19:25:37 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/21 15:46:51 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/21 16:20:33 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@ int	deal_key(int key, t_fdf *param)
 		param->zoom += 4;
 	if (key == 78 && param->zoom > 1)
 		param->zoom -= param->zoom / 2;
-	if (key == 0)
+	if (key == 86)
 		param->angle -= 0.15;
-	if (key == 2)
+	if (key == 88)
 		param->angle += 0.15;
+	if (key == 87)
+		param->is_iso *= -1;
 	if (key == 53)
 		free_exit_succesfully(param);
 	mlx_clear_window(param->mlx_ptr, param->win_ptr);

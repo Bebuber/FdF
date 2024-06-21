@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:07:02 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/21 15:46:06 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/21 16:19:30 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	set_defaults(t_fdf *data)
 	data->shift_x = data->win_x / 2.5;
 	data->shift_y = data->win_y / 15;
 	data->mlx_ptr = mlx_init();
+	data->is_iso = -1;
 	data->win_ptr = \
 	mlx_new_window(data->mlx_ptr, data->win_x, data->win_y, "FDF");
 }
