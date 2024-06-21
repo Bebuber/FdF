@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:07:02 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/21 15:29:55 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/21 15:46:06 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	main(int argc, char **argv)
 	mlx_key_hook(data->win_ptr, deal_key, data);
 	mlx_loop(data->mlx_ptr);
 }
+
 // 		int	i;
 // 	int	j;
 // 	i = 0;

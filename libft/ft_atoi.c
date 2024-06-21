@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 12:07:22 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/20 12:41:54 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/21 16:07:30 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	ft_atoi(const char *str)
 	i = 0;
 	ngt = 1;
 	numb = 0;
-
 	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
 		i++;
 	if_negative(str, &i, &ngt);

@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:55:43 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/20 19:33:27 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/21 15:50:06 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,6 @@ void	print_error_exit(int code)
 	if (code == 4)
 		write(2, "Malloc error\n", 13);
 	exit(EXIT_FAILURE);
-}
-
-void	free_arrays_and_exit(char **tmp, char **nums, t_point **map, t_fdf *data)
-{
-	free_arr(tmp);
-	free_arr(nums);
-	free_data_map_separately(data, map);
-	print_error_exit(3);
 }
 
 void	free_arr(char **arr)

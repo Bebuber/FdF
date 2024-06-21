@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:23:06 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/21 15:30:56 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/21 16:06:58 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ int	wdcounter(char *line, int width, int hght)
 		else if (line[i] != ' ')
 			i++;
 	}
-	// hght = 0;
-	// width = count;
-	if (hght != 0 && count != width)
-		print_error_exit(3);
+	hght = 0;
+	width = count;
 	return (count);
 }
+// if (hght != 0 && count != width)
+// 	print_error_exit(3);
 
 t_point	**get_height(char *file, t_fdf *data)
 {
@@ -144,6 +144,5 @@ t_point	**read_file(char *file, t_fdf *data)
 	if (line)
 		free (line);
 	close(fd);
-
 	return (map);
 }

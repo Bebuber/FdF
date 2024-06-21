@@ -6,11 +6,20 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 20:56:33 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/21 14:57:48 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/21 15:50:35 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	free_arrays_and_exit(char **tmp, char **nums, \
+t_point **map, t_fdf *data)
+{
+	free_arr(tmp);
+	free_arr(nums);
+	free_data_map_separately(data, map);
+	print_error_exit(3);
+}
 
 void	is_valid(char **tmp, char **nums, t_point **map, t_fdf *data)
 {
@@ -32,8 +41,9 @@ void	is_valid(char **tmp, char **nums, t_point **map, t_fdf *data)
 	{
 		if (tmp[1][i] == '0' && tmp[1][i + 1] == 'x')
 			i += 2;
-		if (!((tmp[1][i] >= '0' && tmp[1][i] <= '9') || (tmp[1][i] >= 'a'\
-		&& tmp[1][i] <= 'f') || (tmp[1][i] >= 'A' && tmp[1][i] <= 'F') || tmp[1][i] == '\n'))
+		if (!((tmp[1][i] >= '0' && tmp[1][i] <= '9') || (tmp[1][i] >= 'a' \
+		&& tmp[1][i] <= 'f') || (tmp[1][i] >= 'A' && tmp[1][i] <= 'F') \
+		|| tmp[1][i] == '\n'))
 			free_arrays_and_exit(tmp, nums, map, data);
 		i++;
 	}
