@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:55:43 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/21 16:52:02 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/22 20:02:41 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 void	print_error_exit(int code)
 {
 	if (code == 1)
-		write(2, "File not found\n", 15);
+		write(2, "\033[0;31mFile not found\n\033[0m", 26);
 	if (code == 2)
-		write(2, "Usage: ./fdf <filename>\n", 24);
+		write(2, "\033[0;31mUsage: ./fdf <filename>\n\033[0m", 35);
 	if (code == 3)
-		write(2, "Invalid map\n", 12);
+		write(2, "\033[0;31mInvalid map\n\033[0m", 23);
 	if (code == 4)
-		write(2, "Malloc error\n", 13);
+		write(2, "\033[0;31mMalloc error\n\033[0m", 24);
+	if (code == 5)
+		write(2, "\033[0;31mFile extension is not .fdf\n\033[0m", 38);
 	exit(EXIT_FAILURE);
 }
 
@@ -40,12 +42,22 @@ void	free_arr(char **arr)
 int	check_file(char *file)
 {
 	int	fd;
+	int	i;
 
+	i = 0;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (-1);
 	close(fd);
-	return (0);
+	while (file[i])
+	{
+		if (file[i] == '.')
+			if (file[i + 1] == 'f' && file[i + 2] == 'd' && file[i + 3] == 'f')
+				return (0);
+		i++;
+	}
+	print_error_exit(5);
+	return (-1);
 }
 
 void	free_data_map_separately(t_fdf *data, t_point **map)
@@ -63,7 +75,7 @@ void	free_data_map_separately(t_fdf *data, t_point **map)
 		free(data);
 }
 
-void	free_exit_succesfully(t_fdf *data)
+int	free_exit_succesfully(t_fdf *data)
 {
 	int		i;
 
@@ -76,7 +88,8 @@ void	free_exit_succesfully(t_fdf *data)
 	}
 	if (data)
 		free(data);
+	system("leaks fdf");
+	write(1, "\033[0;32mExiting successfully!\n\033[0m", 33);
 	exit(EXIT_SUCCESS);
+	return (0);
 }
-
-	// system("leaks fdf");

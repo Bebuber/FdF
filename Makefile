@@ -6,7 +6,7 @@
 #    By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/05 16:25:10 by bebuber           #+#    #+#              #
-#    Updated: 2024/06/21 15:45:39 by bebuber          ###   ########.fr        #
+#    Updated: 2024/06/22 21:41:01 by bebuber          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	make -C libft
 	$(CC) $(CFLAGS) $(LIBFT) $(LIBS) $(OBJS) -o $(NAME)
-	echo '\033[0;32m'"==>	Fdf compiled!"
+	echo "==>	Fdf compiled!"
 
 clean:
 	$(RM) $(OBJS)

@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:43:04 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/21 16:13:23 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/22 20:46:58 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,19 @@ typedef struct s_point
 	int		color;
 }	t_point;
 
+typedef struct s_img
+{
+	void	*img;
+	char	*data;
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
+}	t_img;
+
 typedef struct fdf
 {
 	t_point		**map;
+	t_img		img;
 	int			height;
 	int			width;
 	int			shift_x;
@@ -62,7 +72,7 @@ void	print_error_exit(int code);
 void	free_arrays_and_exit(char **tmp, char **nums, \
 t_point **map, t_fdf *data);
 void	free_data_map_separately(t_fdf *data, t_point **map);
-void	free_exit_succesfully(t_fdf *data);
+int		free_exit_succesfully(t_fdf *data);
 void	free_arr(char **arr);
 
 // draw.c
@@ -74,8 +84,11 @@ void	draw_line(t_point p1, t_point p2, t_fdf *data);
 void	zoom(t_point *p1, t_point *p2, t_fdf *data);
 void	iso(t_point *p1, t_point *p2, float angle);
 void	set_values(t_point *p1, t_point *p2, t_fdf *data);
+void	push_img(t_fdf *data);
 
 // key_hook.c
 int		deal_key(int key, t_fdf *param);
+int		deal_mouse(int button, int x, int y, t_fdf *param);
+
 
 #endif

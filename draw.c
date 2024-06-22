@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 11:04:27 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/21 16:49:48 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/22 22:15:10 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ int	set_color(t_point p1, t_point p2)
 {
 	if (p1.color < 0 && p2.color < 0)
 	{
-		if (p2.z > 5 || p1.z > 5)
-			return (0xff0000);
+		if (p2.z > 0 || p1.z > 0)
+			return (0x0000ff);
 		else
-			return (0x00ff00);
+			return (0xffa500);
 	}
 	else if (p2.color > 0 && p1.color > 0)
 	{
@@ -54,6 +54,7 @@ void	draw_line(t_point p1, t_point p2, t_fdf *data)
 	float	y_step;
 	int		color;
 	float	max;
+	char	*str;
 
 	color = set_color(p1, p2);
 	set_values(&p1, &p2, data);
@@ -64,11 +65,13 @@ void	draw_line(t_point p1, t_point p2, t_fdf *data)
 	y_step /= max;
 	while ((int)(p1.x - p2.x) || (int)(p1.y - p2.y))
 	{
-		mlx_pixel_put(data->mlx_ptr, data->win_ptr, p1.x, p1.y, color);
-		p1.x += x_step;
-		p1.y += y_step;
 		if (p1.x < 0 || p1.x > data->win_x || p1.y < 0 || p1.y > data->win_y)
 			break ;
+		printf("Here\n");
+		str = data->img.data + (int)p1.x * 4 + (int)p1.y * data->img.size_line;
+		*(unsigned int *)str = color;
+		p1.x += x_step;
+		p1.y += y_step;
 	}
 }
 
@@ -93,4 +96,5 @@ void	draw_map(t_fdf *data)
 		}
 		y++;
 	}
+	push_img(data);
 }

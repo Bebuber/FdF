@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:07:02 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/21 16:19:30 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/22 21:35:20 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,13 @@ int	main(int argc, char **argv)
 	data = (t_fdf *)ft_malloc(sizeof(t_fdf));
 	data->map = read_file(argv[1], data);
 	set_defaults(data);
+	data->img.img = mlx_new_image(data->mlx_ptr, data->win_x, data->win_y);
+	data->img.data = mlx_get_data_addr(data->img.img, \
+	&data->img.bits_per_pixel, &data->img.size_line, &data->img.endian);
 	draw_map(data);
 	mlx_key_hook(data->win_ptr, deal_key, data);
+	mlx_mouse_hook(data->win_ptr, deal_mouse, data);
+	mlx_hook(data->win_ptr, 17, 0, free_exit_succesfully, data);
 	mlx_loop(data->mlx_ptr);
 }
 
