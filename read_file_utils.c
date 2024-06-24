@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 20:56:33 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/21 15:50:35 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/24 15:33:06 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,14 @@ void	*ft_malloc(size_t size)
 	if (!ptr)
 		print_error_exit(4);
 	return (ptr);
+}
+
+void	tmp_trim(char **tmp, t_point **map, int x, int y)
+{
+	char	*str;
+
+	str = *tmp;
+	*tmp = ft_strtrim(*tmp, "\n");
+	free(str);
+	map[y][x].color = get_color(*tmp);
 }

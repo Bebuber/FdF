@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:23:06 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/22 21:44:23 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/24 15:32:46 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	create_map(char *line, t_point **map, int y, t_fdf *data)
 		map[y][x].x = x;
 		map[y][x].y = y;
 		if (tmp[1])
-			map[y][x].color = get_color(tmp[1]);
+			tmp_trim(&tmp[1], map, x, y);
 		else
 			map[y][x].color = -1;
 		free_arr(tmp);

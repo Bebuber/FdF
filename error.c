@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:55:43 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/22 20:02:41 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/24 15:43:41 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ int	free_exit_succesfully(t_fdf *data)
 	}
 	if (data)
 		free(data);
-	system("leaks fdf");
 	write(1, "\033[0;32mExiting successfully!\n\033[0m", 33);
 	exit(EXIT_SUCCESS);
 	return (0);
 }
+// system("leaks fdf");

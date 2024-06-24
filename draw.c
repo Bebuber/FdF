@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 11:04:27 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/22 22:15:10 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/24 15:44:43 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ int	set_color(t_point p1, t_point p2)
 		else
 			return (p1.color);
 	}
-	else if (p1.color > 0 && p2.color < 0)
-		return (p1.color);
-	else
+	else if (p2.color > 0 && p1.color < 0)
 		return (p2.color);
+	else
+		return (p1.color);
 }
 
 void	draw_line(t_point p1, t_point p2, t_fdf *data)
@@ -54,7 +54,6 @@ void	draw_line(t_point p1, t_point p2, t_fdf *data)
 	float	y_step;
 	int		color;
 	float	max;
-	char	*str;
 
 	color = set_color(p1, p2);
 	set_values(&p1, &p2, data);
@@ -65,11 +64,12 @@ void	draw_line(t_point p1, t_point p2, t_fdf *data)
 	y_step /= max;
 	while ((int)(p1.x - p2.x) || (int)(p1.y - p2.y))
 	{
-		if (p1.x < 0 || p1.x > data->win_x || p1.y < 0 || p1.y > data->win_y)
+		if (p1.x < 0 || p1.x > data->win_x \
+		|| p1.y < 0 || p1.y > data->win_y)
 			break ;
-		printf("Here\n");
-		str = data->img.data + (int)p1.x * 4 + (int)p1.y * data->img.size_line;
-		*(unsigned int *)str = color;
+		if ((int)p1.x > 0 && (int)p1.x < data->win_x && \
+		(int)p1.y > 0 && (int)p1.y < data->win_y)
+			color_pixel(data, (int)p1.x, (int)p1.y, color);
 		p1.x += x_step;
 		p1.y += y_step;
 	}

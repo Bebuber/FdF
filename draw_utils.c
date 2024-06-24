@@ -6,20 +6,34 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 15:43:48 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/22 21:35:07 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/24 15:37:23 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+void	color_pixel(t_fdf *data, int x, int y, int color)
+{
+	char	*dst;
+	int		i;
+
+	if (x > data->win_x || y > data->win_y)
+		return ;
+	i = (x * data->img.bits_per_pixel / 8) + (y * data->img.size_line);
+	dst = data->img.data + i;
+	*(unsigned int *)dst = color;
+}
+
 void	zoom(t_point *p1, t_point *p2, t_fdf *data)
 {
-	if (data->zoom < 0)
+	if (data->zoom <= 0)
 		data->zoom = 1;
 	(*p1).x *= data->zoom;
 	(*p1).y *= data->zoom;
 	(*p2).x *= data->zoom;
 	(*p2).y *= data->zoom;
+	// (*p1).z *= data->zoom;
+	// (*p2).z *= data->zoom;
 }
 
 void	iso(t_point *p1, t_point *p2, float angle)
@@ -59,4 +73,3 @@ void	push_img(t_fdf *data)
 	data->img.data = mlx_get_data_addr(data->img.img, \
 	&data->img.bits_per_pixel, &data->img.size_line, &data->img.endian);
 }
-

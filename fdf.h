@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:43:04 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/22 20:46:58 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/24 15:43:59 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-//# include <stdio.h>
 # include <fcntl.h>
-# include <stdio.h>
 # include <math.h>
 # include "libft/libft.h"
 # include "minilibx_macos/mlx.h"
@@ -66,6 +64,8 @@ t_point	**read_file(char *file, t_fdf *data);
 void	is_valid(char **tmp, char **nums, t_point **map, t_fdf *data);
 int		hex_to_int(char *str);
 void	*ft_malloc(size_t size);
+void	tmp_trim(char **tmp, t_point **map, int x, int y);
+int		get_color(char *str);
 
 // error.c
 void	print_error_exit(int code);
@@ -85,10 +85,10 @@ void	zoom(t_point *p1, t_point *p2, t_fdf *data);
 void	iso(t_point *p1, t_point *p2, float angle);
 void	set_values(t_point *p1, t_point *p2, t_fdf *data);
 void	push_img(t_fdf *data);
+void	color_pixel(t_fdf *data, int x, int y, int color);
 
 // key_hook.c
 int		deal_key(int key, t_fdf *param);
 int		deal_mouse(int button, int x, int y, t_fdf *param);
-
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:07:02 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/22 21:35:20 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/24 13:00:19 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	set_defaults(t_fdf *data)
 {
 	data->angle = 0.8;
-	data->zoom = 7;
-	data->win_x = 2000;
-	data->win_y = 1000;
+	data->zoom = 2;
+	data->win_x = 1300;
+	data->win_y = 800;
 	data->shift_x = data->win_x / 2.5;
-	data->shift_y = data->win_y / 15;
+	data->shift_y = data->win_y / 4;
 	data->mlx_ptr = mlx_init();
 	data->is_iso = -1;
 	data->win_ptr = \
