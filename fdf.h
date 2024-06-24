@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:43:04 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/24 15:43:59 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/24 16:04:44 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct fdf
 	int			win_x;
 	int			win_y;
 	int			zoom;
+	int			z_zoom;
 	float		angle;
 	int			is_iso;
 
@@ -90,5 +91,6 @@ void	color_pixel(t_fdf *data, int x, int y, int color);
 // key_hook.c
 int		deal_key(int key, t_fdf *param);
 int		deal_mouse(int button, int x, int y, t_fdf *param);
+int		deal_key_helper(int key, t_fdf *param);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 19:25:37 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/22 19:31:10 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/24 16:09:02 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,23 @@ int	deal_key(int key, t_fdf *param)
 		param->shift_x -= 100;
 	if (key == 124)
 		param->shift_x += 100;
+	if (key == 91)
+		param->z_zoom += 2;
+	if (key == 84)
+		param->z_zoom -= 2;
+	if (key >= 53 && key <= 88)
+		deal_key_helper(key, param);
+	mlx_clear_window(param->mlx_ptr, param->win_ptr);
+	draw_map(param);
+	return (0);
+}
+
+int	deal_key_helper(int key, t_fdf *param)
+{
 	if (key == 69)
 		param->zoom += 4;
 	if (key == 78 && param->zoom > 1)
-		param->zoom -= param->zoom / 2;
+		param->zoom -= 8;
 	if (key == 86)
 		param->angle -= 0.15;
 	if (key == 88)

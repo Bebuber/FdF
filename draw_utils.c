@@ -6,7 +6,7 @@
 /*   By: bebuber <bebuber@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 15:43:48 by bebuber           #+#    #+#             */
-/*   Updated: 2024/06/24 15:37:23 by bebuber          ###   ########.fr       */
+/*   Updated: 2024/06/24 16:14:41 by bebuber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,15 @@ void	zoom(t_point *p1, t_point *p2, t_fdf *data)
 {
 	if (data->zoom <= 0)
 		data->zoom = 1;
+	if (data->is_iso == 1)
+		if (data->zoom <= 2)
+			data->zoom = 2;
 	(*p1).x *= data->zoom;
 	(*p1).y *= data->zoom;
 	(*p2).x *= data->zoom;
 	(*p2).y *= data->zoom;
-	// (*p1).z *= data->zoom;
-	// (*p2).z *= data->zoom;
+	(*p1).z *= data->z_zoom;
+	(*p2).z *= data->z_zoom;
 }
 
 void	iso(t_point *p1, t_point *p2, float angle)
