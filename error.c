@@ -92,4 +92,3 @@ int	free_exit_succesfully(t_fdf *data)
 	exit(EXIT_SUCCESS);
 	return (0);
 }
-// system("leaks fdf");
