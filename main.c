@@ -47,19 +47,3 @@ int	main(int argc, char **argv)
 	mlx_hook(data->win_ptr, 17, 0, free_exit_succesfully, data);
 	mlx_loop(data->mlx_ptr);
 }
-
-// 		int	i;
-// 	int	j;
-// 	i = 0;
-// 	j = 0;
-// 	while (i < data->height)
-// 	{
-// 		j = 0;
-// 		while (j < data->width)
-// 		{
-// 			printf("%2d ", data->map[i][j].z);
-// 			j++;
-// 		}
-// 		printf("\n");
-// 		i++;
-// 	}
